@@ -1,0 +1,45 @@
+<aura:component controller="StudentController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    
+    <!-- 1. KHAI BÁO ATTRIBUTES (Biến lưu trữ dữ liệu) -->
+    <!-- Biến dùng để chứa danh sách học sinh trả về từ Apex -->
+    <aura:attribute name="studentList" type="List" />
+    
+    <!-- 2. HANDLER (Sự kiện tự động chạy khi load trang) -->
+    <!-- Khi component vừa hiển thị, nó sẽ tự động gọi hàm doInit trong JS -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- 3. GIAO DIỆN CHÍNH (Dùng thư viện thẻ chuẩn SLDS của Salesforce) -->
+    <div class="slds-box slds-theme_default slds-m-around_medium custom-box">
+        <!-- Tiêu đề trang -->
+        <div class="slds-page-header slds-m-bottom_medium">
+            <h1 class="slds-page-header__title slds-truncate">STUDENT MANAGEMENT SYSTEM</h1>
+        </div>
+
+        <!-- BẢNG HIỂN THỊ DANH SÁCH HỌC SINH -->
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col"><div class="slds-truncate">Student Name</div></th>
+                    <th scope="col"><div class="slds-truncate">Email</div></th>
+                    <th scope="col"><div class="slds-truncate">Birthday</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Vòng lặp aura:iteration để duyệt qua từng học sinh trong mảng studentList -->
+                <aura:iteration items="{!v.studentList}" var="student">
+                    <tr>
+                        <td data-label="Student Name">
+                            <div class="slds-truncate font-bold">{!student.Name}</div>
+                        </td>
+                        <td data-label="Email">
+                            <div class="slds-truncate">{!student.Email__c}</div>
+                        </td>
+                        <td data-label="Birthday">
+                            <div class="slds-truncate">{!student.Birthday__c}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>
