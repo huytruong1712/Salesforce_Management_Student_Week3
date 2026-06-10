@@ -17,5 +17,15 @@
         
         // 3. Đưa hành động này vào hàng đợi để Salesforce thực thi
         $A.enqueueAction(action);
+        helper.fetchStudents(component);
+    },
+
+    // HÀM MỚI ĐỂ HỨNG EVENT TỪ CON
+    handleSearchFromChild : function(component, event, helper) {
+        // 1. Bóc bức thư ra để lấy cái tham số 'keyword' mà thằng con gửi lên
+        var searchKeyFromChild = event.getParam("keyword");
+        
+        // 2. Gửi cái keyword này sang cho Helper gọi Apex (Hàm helper này bạn đã viết ở bước trước rồi, giữ nguyên)
+        helper.searchStudentsByKeyword(component, searchKeyFromChild);
     }
 })

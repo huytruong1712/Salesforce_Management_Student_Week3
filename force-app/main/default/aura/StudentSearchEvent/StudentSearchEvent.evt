@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Event dùng để truyền từ khóa tìm kiếm từ con lên cha">
+    <aura:attribute name="keyword" type="String" />
+</aura:event>

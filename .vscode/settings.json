@@ -4,5 +4,27 @@
     "**/bower_components": true,
     "**/.sf": true,
     "**/.sfdx": true
-  }
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/*.meta": true,
+    "**/*.fbx": true,
+    "Libraries/": true,
+    "Cache": false,
+    "Cache/": false,
+    "Cache/**": false
+  },
+  "workbench.colorTheme": "Dark 2026",
+  "editor.semanticTokenColorCustomizations": {
+    "rules": {
+      "*.deprecated": {
+        "fontStyle": "strikethrough"
+      }
+    }
+  },
+  "path-intellisense.extensionOnImport": true
 }

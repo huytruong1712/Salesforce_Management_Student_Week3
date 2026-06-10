@@ -1,0 +1,13 @@
+<aura:component>
+    <aura:registerEvent name="searchEvt" type="c:StudentSearchEvent"/>
+
+    <div class="slds-m-bottom_medium" style="max-width: 400px;">
+        <lightning:input 
+            name="studentSearchInput"
+            label="Search Student"
+            type="search"
+            variant="label-hidden"
+            placeholder="Type student name to search (Using Event)..."
+            onchange="{!c.fireSearchEvent}" /> 
+    </div>
+</aura:component>
