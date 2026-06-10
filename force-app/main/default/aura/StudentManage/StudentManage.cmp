@@ -15,6 +15,16 @@
             <h1 class="slds-page-header__title slds-truncate">STUDENT MANAGEMENT SYSTEM</h1>
         </div>
 
+        <div class="slds-m-bottom_medium" style="max-width: 400px;">
+            <lightning:input 
+                name="studentSearch"
+                label="Search Student by Name"
+                type="search"
+                variant="label-hidden"
+                placeholder="Type student name to search..."
+                onchange="{!c.handleSearch}" /> 
+        </div>
+
         <!-- BẢNG HIỂN THỊ DANH SÁCH HỌC SINH -->
         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
             <thead>

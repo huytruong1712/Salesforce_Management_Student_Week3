@@ -17,5 +17,14 @@
         
         // 3. Đưa hành động này vào hàng đợi để Salesforce thực thi
         $A.enqueueAction(action);
+        helper.fetchStudents(component);
+    },
+
+    handleSearch : function(component, event, helper) {
+        // 1. Lấy giá trị chữ mà người dùng đang gõ trong ô Input
+        var searchKey = event.getParam("value");
+        
+        // 2. Giao việc cho Helper xử lý gọi Apex để lọc danh sách
+        helper.searchStudentsByKeyword(component, searchKey);
     }
 })

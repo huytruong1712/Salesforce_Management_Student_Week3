@@ -9,7 +9,7 @@ public with sharing class StudentSelector {
                 ORDER BY CreatedDate DESC];
     }
 
-    public static List<Student__c> selectStudentByName(String keyWord){
+    public static List<Student__c> selectStudentsByName(String keyWord){
         String key = '%' + keyWord +'%';
         return [SELECT Id, Name, Email__c, Birthday__c
                 FROM Student__c
