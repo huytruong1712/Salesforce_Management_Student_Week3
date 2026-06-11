@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Event truyền dữ liệu học sinh mới từ con lên cha">
+    <aura:attribute name="newStudent" type="Student__c" />
+</aura:event>

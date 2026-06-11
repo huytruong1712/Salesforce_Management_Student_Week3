@@ -10,12 +10,20 @@
 
     <aura:handler name="searchEvt" event="c:StudentSearchEvent" action="{!c.handleSearchFromChild}" />
 
+    <aura:handler name="addEvt" event="c:StudentAddEvent" action="{!c.handlePostStudentFromChild}" />
+
+    <aura:attribute name="isOpenEditModal" type="Boolean" default="false" />
+
+    <aura:attribute name="selectedStudent" type="Student__c" default="{'sobjectType': 'Student__c'}" />
+
     <!-- 3. GIAO DIỆN CHÍNH (Dùng thư viện thẻ chuẩn SLDS của Salesforce) -->
     <div class="slds-box slds-theme_default slds-m-around_medium custom-box">
         <!-- Tiêu đề trang -->
         <div class="slds-page-header slds-m-bottom_medium">
             <h1 class="slds-page-header__title slds-truncate">STUDENT MANAGEMENT SYSTEM</h1>
         </div>
+
+        <c:StudentAddForm />
 
         <c:StudentSearch />
 
@@ -26,6 +34,7 @@
                     <th scope="col"><div class="slds-truncate">Student Name</div></th>
                     <th scope="col"><div class="slds-truncate">Email</div></th>
                     <th scope="col"><div class="slds-truncate">Birthday</div></th>
+                    <th scope="col"><div class="slds-truncate">Actions</div></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,9 +50,44 @@
                         <td data-label="Birthday">
                             <div class="slds-truncate">{!student.Birthday__c}</div>
                         </td>
+                        <td data-label="Actions">
+                            <lightning:button 
+                                label="Edit" 
+                                variant="neutral" 
+                                name="{!student}" 
+                                onclick="{!c.handleEditClick}" 
+                                class="slds-m-right_text-unique"/>
+
+                            <lightning:button 
+                                label="Delete" 
+                                variant="destructive" 
+                                name="{!student.Id}" 
+                                onclick="{!c.handleDeleteClick}" />
+                        </td>
                     </tr>
                 </aura:iteration>
             </tbody>
         </table>
     </div>
+
+    <aura:if isTrue="{!v.isOpenEditModal}">
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">Edit Student Information</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning:input label="Student Name" value="{!v.selectedStudent.Name}" required="true" class="slds-m-bottom_small"/>
+                    <lightning:input type="email" label="Email" value="{!v.selectedStudent.Email__c}" />
+                    <lightning:input type="date" label="Birthday" value="{!v.selectedStudent.Birthday__c}" />
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button label="Cancel" variant="neutral" onclick="{!c.closeModal}" />
+                    <lightning:button label="Save Changes" variant="brand" onclick="{!c.handleUpdateSave}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
 </aura:component>

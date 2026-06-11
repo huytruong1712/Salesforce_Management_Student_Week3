@@ -5,7 +5,7 @@ public with sharing class StudentController {
 
     @AuraEnabled(cacheable=false)
     public static List<Student__c> getStudentList() {
-        return StudentSelector.selectAllStudents();
+        return StudentService.selectAllStudents();
     }
 
     @AuraEnabled
@@ -13,12 +13,43 @@ public with sharing class StudentController {
         StudentService.insertStudents(studentRecords);
     }
 
+    @AuraEnabled
+    public static void addStudent(Student__c studentRecord) {
+        List<Student__c> studentsToInsert = new List<Student__c>();
+        if (studentRecord != null) {
+            studentsToInsert.add(studentRecord);
+        }
+        
+        StudentService.insertStudents(studentsToInsert);
+    }
+
     @AuraEnabled(cacheable=false)
     public static List<Student__c> searchStudents(String searchKey){
         if(String.isBlank(searchKey)){
-            return StudentSelector.selectAllStudents();
+            return StudentService.selectAllStudents();
         } else {
-            return StudentSelector.selectStudentsByName(searchKey);
+            return StudentService.selectStudentsByName(searchKey);
         }
+    }
+
+    @AuraEnabled
+    public static void deleteStudent(String studentId) {
+        if (String.isBlank(studentId)) {
+            throw new AuraHandledException('Student ID cannot be blank.');
+        }
+        
+        Student__c studentToDelete = new Student__c(Id = studentId);
+        
+        StudentService.deleteStudents(new List<Student__c>{ studentToDelete });
+    }
+
+    @AuraEnabled
+    public static void updateStudent(Student__c studentRecord) {
+        if (studentRecord == null || String.isBlank(studentRecord.Id)) {
+            throw new AuraHandledException('Missing Student Record or Student ID.');
+        }
+        
+        // Tái sử dụng hàm updateStudents bằng cách bọc vào một List
+        StudentService.updateStudents(new List<Student__c>{ studentRecord });
     }
 }

@@ -1,0 +1,25 @@
+<aura:component>
+    <aura:registerEvent name="addEvt" type="c:StudentAddEvent"/>
+
+    <aura:attribute name="studentObj" type="Student__c" default="{'sobjectType': 'Student__c', 'Name': '', 'Email__c': '', 'Birthday__c': ''}" />
+
+    <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+        <h3 class="slds-text-heading_small slds-m-bottom_small">Add New Student</h3>
+        
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-3">
+                <lightning:input label="Student Name" value="{!v.studentObj.Name}" required="true" />
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning:input type="email" label="Email" value="{!v.studentObj.Email__c}" />
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning:input type="date" label="Birthday" value="{!v.studentObj.Birthday__c}" />
+            </div>
+        </div>
+
+        <div class="slds-m-top_small">
+            <lightning:button label="Save Student" variant="brand" onclick="{!c.handleSave}" />
+        </div>
+    </div>
+</aura:component>
