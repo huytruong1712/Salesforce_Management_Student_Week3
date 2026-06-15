@@ -19,7 +19,7 @@ public with sharing class StudentController {
         if (studentRecord != null) {
             studentsToInsert.add(studentRecord);
         }
-        
+
         StudentService.insertStudents(studentsToInsert);
     }
 
@@ -52,4 +52,11 @@ public with sharing class StudentController {
         // Tái sử dụng hàm updateStudents bằng cách bọc vào một List
         StudentService.updateStudents(new List<Student__c>{ studentRecord });
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Student__c> getStudentListForLwc() {
+        return StudentSelector.selectAllStudents();
+    }
+
+    
 }

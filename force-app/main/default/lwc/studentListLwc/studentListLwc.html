@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title="STUDENT LIST (BUILT WITH LWC)" icon-name="standard:user">
+        <div class="slds-m-around_medium">
+            
+            <template if:true={students.data}>
+                
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th scope="col"><div class="slds-truncate">Student Name</div></th>
+                            <th scope="col"><div class="slds-truncate">Email</div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={students.data} for:item="student">
+                            <tr key={student.Id}>
+                                <td data-label="Student Name"><div class="slds-truncate font-bold">{student.Name}</div></td>
+                                <td data-label="Email"><div class="slds-truncate">{student.Email__c}</div></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+
+            </template>
+
+            <template if:true={students.error}>
+                <div class="slds-text-color_error">
+                    Failed to load students.
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>
