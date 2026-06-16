@@ -1,0 +1,21 @@
+<template>
+    <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+        <h3 class="slds-text-heading_small slds-m-bottom_small">Add New Student</h3>
+        
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input label="Name" class="input-name" required></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="email" label="Email" class="input-email"></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="date" label="Birthday" class="input-dob"></lightning-input>
+            </div>
+        </div>
+
+        <div class="slds-m-top_small">
+            <lightning-button label="Save Student" variant="brand" onclick={handleSave}></lightning-button>
+        </div>
+    </div>
+</template>

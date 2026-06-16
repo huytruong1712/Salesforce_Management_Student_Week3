@@ -2,31 +2,55 @@
     <lightning-card title="STUDENT LIST (BUILT WITH LWC)" icon-name="standard:user">
         <div class="slds-m-around_medium">
             
-            <template if:true={students.data}>
-                
-                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <c-student-add-lwc onaddstudent={handleAddStudent}></c-student-add-lwc>
+
+            <c-student-search-lwc onsearch={handleSearch}></c-student-search-lwc>
+
+            <template if:true={students}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
                     <thead>
                         <tr class="slds-line-height_reset">
-                            <th scope="col"><div class="slds-truncate">Student Name</div></th>
+                            <th scope="col"><div class="slds-truncate">Name</div></th>
                             <th scope="col"><div class="slds-truncate">Email</div></th>
+                            <th scope="col"><div class="slds-truncate">Birthday</div></th>
+                            <th scope="col"><div class="slds-truncate">Actions</div></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <template for:each={students.data} for:item="student">
+                        <template for:each={students} for:item="student">
                             <tr key={student.Id}>
-                                <td data-label="Student Name"><div class="slds-truncate font-bold">{student.Name}</div></td>
-                                <td data-label="Email"><div class="slds-truncate">{student.Email__c}</div></td>
+                                <td><div class="slds-truncate font-bold">{student.Name}</div></td>
+                                <td><div class="slds-truncate">{student.Email__c}</div></td>
+                                <td><div class="slds-truncate">{student.Birthday__c}</div></td>
+                                <td>
+                                    <lightning-button label="Edit" variant="neutral" data-id={student.Id} onclick={handleEditClick} class="slds-m-right_x-small"></lightning-button>
+                                    
+                                    <lightning-button label="Delete" variant="destructive" data-id={student.Id} onclick={handleDeleteClick}></lightning-button>
+                                </td>
                             </tr>
                         </template>
                     </tbody>
                 </table>
-
             </template>
-
-            <template if:true={students.error}>
-                <div class="slds-text-color_error">
-                    Failed to load students.
-                </div>
+            
+            <template if:true={isEditModalOpen}>
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <h2 class="slds-text-heading_medium">Edit Student</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <lightning-input label="Name" value={selectedStudent.Name} data-field="Name" onchange={handleFieldChange} class="slds-m-bottom_small" required></lightning-input>
+                            <lightning-input type="email" label="Email" value={selectedStudent.Email__c} data-field="Email__c" onchange={handleFieldChange} class="slds-m-bottom_small"></lightning-input>
+                            <lightning-input type="date" label="Birthday" value={selectedStudent.Birthday__c} data-field="Birthday__c" onchange={handleFieldChange}></lightning-input>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" variant="neutral" onclick={closeModal} class="slds-m-right_small"></lightning-button>
+                            <lightning-button label="Save Changes" variant="brand" onclick={handleUpdateSave}></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
             </template>
 
         </div>
