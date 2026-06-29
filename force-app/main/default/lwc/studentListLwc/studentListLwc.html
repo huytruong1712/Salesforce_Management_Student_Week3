@@ -6,6 +6,10 @@
 
             <c-student-search-lwc onsearch={handleSearch}></c-student-search-lwc>
 
+            <div class="slds-m-bottom_medium slds-text-align_right">
+                <lightning-button label="Export to PDF" variant="success" icon-name="utility:download" onclick={handleExportPDF}></lightning-button>
+            </div>
+
             <template if:true={students}>
                 <table class="slds-table slds-table_cell-buffer slds-table_bordered">
                     <thead>

@@ -1,0 +1,40 @@
+<apex:page controller="StudentPDFController" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    <html>
+        <head>
+            <style>
+                /* CSS để định dạng bảng trong PDF cho đẹp */
+                body { font-family: sans-serif; }
+                .title { text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 20px; color: #0176D3; }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { border: 1px solid #dddddd; padding: 8px; text-align: left; }
+                th { background-color: #f2f2f2; }
+            </style>
+        </head>
+        <body>
+            <div class="title">STUDENT LIST REPORT</div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!studentList}" var="stu">
+                        <tr>
+                            <td>{!stu.Name}</td>
+                            <td>{!stu.Email__c}</td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!stu.Birthday__c}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </body>
+    </html>
+</apex:page>

@@ -98,6 +98,13 @@ export default class StudentListLwc extends LightningElement {
         }
     }
 
+    // Hàm mở trang Visualforce Page ở tab mới
+    handleExportPDF() {
+        // Đường dẫn chuẩn của mọi trang Visualforce là /apex/Ten_Trang
+        const pdfUrl = '/apex/StudentPdfPage';
+        window.open(pdfUrl, '_blank');
+    }
+
     // --- HÀM TIỆN ÍCH ---
     showToast(title, message, variant) {
         this.dispatchEvent(new ShowToastEvent({ title, message, variant }));
