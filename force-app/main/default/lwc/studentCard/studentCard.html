@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title={student.Name} icon-name="standard:user">
+        <div class="slds-p-horizontal_small">
+            <p><strong>Name:</strong> {student.Name}</p>
+            <p><strong>Email:</strong> {student.Email__c}</p>
+            <p><strong>Birth Date:</strong> {student.Birth_Date__c}</p>
+            <p><strong>Status:</strong> {student.Status__c}</p>
+        </div>
+        
+        <div slot="footer">
+            <lightning-button 
+                label="Chọn Học Sinh" 
+                variant="brand" 
+                onclick={handleSelectClick}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

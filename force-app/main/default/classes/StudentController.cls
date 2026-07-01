@@ -3,6 +3,11 @@ public with sharing class StudentController {
 
     // }
 
+    @AuraEnabled(cacheable=true)
+    public static List<Student__c> get5LastestStudents() {
+        return StudentService.select5LatestStudents();
+    }
+
     @AuraEnabled(cacheable=false)
     public static List<Student__c> getStudentList() {
         return StudentService.selectAllStudents();

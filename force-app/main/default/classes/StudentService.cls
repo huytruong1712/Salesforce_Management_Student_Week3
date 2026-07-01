@@ -2,6 +2,12 @@ public with sharing class StudentService {
     // public StudentService() {
 
     // }
+    public static List<Student__c> select5LatestStudents(){
+        return [SELECT Id, Name, Email__c, Birthday__c
+                FROM Student__c
+                ORDER BY CreatedDate DESC
+                LIMIT 5];
+    }
 
     public static List<Student__c> selectAllStudents(){
         return [SELECT Id, Name, Email__c, Birthday__c
